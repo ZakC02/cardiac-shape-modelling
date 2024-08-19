@@ -1,0 +1,75 @@
+PROJET IMA 206
+
+soutenance autour du 24 juin , vidéo 3/4 j avant
+
+1 vid de 10 min
+1 rapp de 15 pages
+Code produit: utilisation d'internet avec références autorisé
+
+suivi 1 réu par semaine, 30 min
+
+Créer un overleaf, progrès de la semaine, quest, etc pour en discuter pdt la réu
+
+rapport intermédiaire d'une page le 8 JUIN
+
+---------------------------
+
+résolution ordre du millimètre
+1 patient = ~10 slices
+modèle qui apprend l'anatomie cardiaque
+
+VAE qui génère la carte de probabilité
+VAE 2D coupe par coupe,
+4 valeurs / canaux : background+ 3 labels
+
+5 groupes : sains + 4 classes pathologiques
+
+preprocess le dataset : extraire les slices 2D et préserver l'info de la localisation sur le coeur (bas ou haut)
+
+ED = End disatoly = max dilatation
+ES = End Sistoly = max de contraction : pas tjrs la mm frame
+
+.nii.gz = format image medicales, images volumétriques, "nifti"
+on utilise des bibli
+
+images pas tjrs la mm taille
+
+etape de preprocessing : crop autour de la région d'intéret, + petite marge, taille standardisée, 
+
+bibli:
+torch io : entrainer un modele avec ces données
+monai
+
+
+dataset : 
+slice, indice de loc, contraction, etc.
+classe
+
+dataloader crée les batch
+
+
+
+architecture de VAE:
+papiers de recherches ou recoder de 0
+article 2 : implementation details
+latent space: à voir si on change, 8 , 32
+
+
+download les données + preprocess + architecture du VAE
+loss : cross entropy
+
+preprocess : bounding box + padding : pas tjrs le mm nb de pixels
+resize 128x128, interpolation : nearest neighbour pour garder des valeurs entières
+
+
+etape d'évaluation:
+-reconstruction
+-génération : coder le FID (loss), calculer des stats sur les images générées et les réelles, les comparer (avec un réseau de neurones?)
+-evaluation de ce qui se passe dans l'espace latent
+  - regarder l'effet des dimensions
+  - non-linear embedding : 1->2 dimensions en maintenant l'info sur le vecteur de départ. Une image = 1 point en 2D, avec une couleur
+  - analyser l'importance de chaque méta donnée dans l'espace latent (2D) avec des color map
+
+créer un beta-VAE et tester des valeurs de beta
+
+-
